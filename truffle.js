@@ -5,9 +5,7 @@ module.exports = {
       port: 8545,
       network_id: "*" // Match any network id
     }
-  }
-};
-
+  },
   compilers: {
     solc: {
       version: "^0.4.24"    // Fetch exact version from solc-bin (default: truffle's version)
@@ -21,3 +19,4 @@ module.exports = {
       // }
     }
   }
+};
