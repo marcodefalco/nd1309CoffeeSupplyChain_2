@@ -42,12 +42,11 @@ contract('SupplyChain', function(accounts) {
     console.log("Consumer: accounts[4] ", accounts[4])
 
 
-
     // 1st Test
     it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee", async() => {
         const supplyChain = await SupplyChain.deployed()
-
         // Declare and Initialize a variable for event
+        await supplyChain.addFarmer(originFarmerID{ from: ownerID });
         var eventEmitted = false
 
         // Watch the emitted event Harvested()
@@ -58,7 +57,6 @@ contract('SupplyChain', function(accounts) {
 
         // Mark an item as Harvested by calling function harvestItem()
         await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
-
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
