@@ -46,7 +46,7 @@ contract('SupplyChain', function(accounts) {
     it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee", async() => {
         const supplyChain = await SupplyChain.deployed()
         // Declare and Initialize a variable for event
-        await supplyChain.addFarmer(originFarmerID{ from: ownerID });
+        await supplyChain.addFarmer(originFarmerID, { from: ownerID });
         var eventEmitted = false
 
         // Watch the emitted event Harvested()
