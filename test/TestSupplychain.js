@@ -219,7 +219,7 @@ contract('SupplyChain', function(accounts) {
         })
 
         // Mark an item as Sold by calling function buyItem() || Ship Item?
-        await supplyChain.shipItem(upc, { from: distributorID });
+        await supplyChain.shipItem(upc, { from: distributorID })
 
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
@@ -249,9 +249,10 @@ contract('SupplyChain', function(accounts) {
             eventEmitted = true
         })
 
+
         // Mark an item as Sold by calling function buyItem()
 
-        await supplyChain.receiveItem(upc, { from: ownerID }) // also tried with retailerID
+        await supplyChain.receiveItem(upc, { from: retailerID })
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
@@ -286,7 +287,13 @@ contract('SupplyChain', function(accounts) {
     const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
     // Verify the result set
-    
+    assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU');
+    assert.equal(resultBufferOne[1], upc, 'Error: Invalid item UPC');
+    assert.equal(resultBufferOne[2], consumerID, 'Error: Invalid item Owner'); // make sure owner is Retailer
+    assert.equal(resultBufferTwo[5], 7, 'Error: Invalid item State'); // state is updated to Received
+    assert.equal(resultBufferTwo[8], consumerID, 'Error: Invalid item Consumer');
+    assert.equal(eventEmitted, true, 'Invalid event emitted');
+})
 
 
 
