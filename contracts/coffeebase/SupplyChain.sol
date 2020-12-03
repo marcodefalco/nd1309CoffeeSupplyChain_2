@@ -279,7 +279,7 @@ items[_upc] = Item({
     {
     // Update the appropriate fields - ownerID, retailerID, itemState
     items[_upc].itemState = State.Received;
-    items[_upc].ownerID = msg.sender;
+    items[_upc].ownerID = owner;
     items[_upc].retailerID = msg.sender;
     // Emit the appropriate event
     emit Received(_upc);
