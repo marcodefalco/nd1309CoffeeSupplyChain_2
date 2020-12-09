@@ -274,12 +274,12 @@ items[_upc] = Item({
     shipped(_upc)
 
     // Access Control List enforced by calling Smart Contract / DApp
-    verifyCaller(items[_upc].retailerID) // here I wanted to use onlyRetailer, but it doesn't work.
+    // verifyCaller(items[_upc].retailerID) // here I wanted to use onlyRetailer, but it doesn't work.
 
     {
     // Update the appropriate fields - ownerID, retailerID, itemState
     items[_upc].itemState = State.Received;
-    items[_upc].ownerID = owner;
+    items[_upc].ownerID = msg.sender;
     items[_upc].retailerID = msg.sender;
     // Emit the appropriate event
     emit Received(_upc);
@@ -293,7 +293,7 @@ items[_upc] = Item({
     received(_upc)
 
     // Access Control List enforced by calling Smart Contract / DApp
-    verifyCaller(items[_upc].consumerID)
+    // verifyCaller(items[_upc].consumerID)
     {
     // Update the appropriate fields - ownerID, consumerID, itemState
     items[_upc].itemState = State.Purchased;
